@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, Button, View, Text } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, TextInput, Button, View, Text, Alert } from "react-native";
 
 const App = () => {
-  const [nameSurname, setNameSurname] = useState('');
-  const [yearOfBirth, setYearOfBirth] = useState('');
+  const [nameSurname, setNameSurname] = useState("");
+  const [yearOfBirth, setYearOfBirth] = useState("");
 
   const handleSubmit = () => {
-    alert(`Name and Surname: ${nameSurname}\nYear of Birth: ${yearOfBirth}`);
+    try {
+      if (nameSurname.trim() === "" || yearOfBirth.trim() === "") {
+        Alert.alert("Error", "Please fill in all fields");
+        return;
+      }
+
+      Alert.alert("Submitted Information", `Name and Surname: ${nameSurname}\nYear of Birth: ${yearOfBirth}`);
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
   };
 
   return <SafeAreaView style={styles.container}>
@@ -25,17 +34,17 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   inputContainer: {
-    width: '80%',
+    width: "80%",
     marginBottom: 20
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10
   },
