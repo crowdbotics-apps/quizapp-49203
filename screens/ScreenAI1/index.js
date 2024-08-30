@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Image, TouchableOpacity, Alert } from "react-native";
 
 const ProfileScreen = () => {
-  const [name, setName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [name, setName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+
+  const handleSubmit = () => {
+    if (name.trim() === "" || dateOfBirth.trim() === "") {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    Alert.alert("Profile Information", `Name: ${name}\nDate of Birth: ${dateOfBirth}`);
+  };
+
   return <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image source={{
-        uri: 'https://tinyurl.com/42evm3m3'
+        uri: "https://tinyurl.com/42evm3m3"
       }} style={styles.logo} />
         <Text style={styles.headerText}>Profile Information</Text>
       </View>
@@ -15,8 +25,8 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Name</Text>
         <TextInput style={styles.input} onChangeText={setName} value={name} placeholder="Enter your name" />
         <Text style={styles.label}>Date of Birth</Text>
-        <TextInput style={styles.input} onChangeText={setDateOfBirth} value={dateOfBirth} placeholder="YYYY-MM-DD" />
-        <TouchableOpacity style={styles.button}>
+        <TextInput style={styles.input} onChangeText={setDateOfBirth} value={dateOfBirth} placeholder="YYYY-MM-DD" keyboardType="numeric" />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -26,13 +36,13 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: "#f5f5f5"
   },
   header: {
     padding: 20,
-    backgroundColor: '#6200ee',
-    flexDirection: 'row',
-    alignItems: 'center'
+    backgroundColor: "#6200ee",
+    flexDirection: "row",
+    alignItems: "center"
   },
   logo: {
     width: 50,
@@ -40,10 +50,10 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   headerText: {
-    color: '#fff',
+    color: "#fff",
     marginLeft: 10,
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   inputContainer: {
     padding: 20
@@ -52,29 +62,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
     marginTop: 15,
-    color: '#333'
+    color: "#333"
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 10,
     paddingVertical: 15,
     borderRadius: 5,
     fontSize: 16,
-    color: '#333',
+    color: "#333",
     borderWidth: 1,
-    borderColor: '#ddd'
+    borderColor: "#ddd"
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#6200ee',
+    backgroundColor: "#6200ee",
     padding: 15,
     borderRadius: 5,
-    alignItems: 'center'
+    alignItems: "center"
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   }
 });
 export default ProfileScreen;
