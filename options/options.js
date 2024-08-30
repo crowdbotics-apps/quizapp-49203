@@ -5,7 +5,7 @@ export const globalOptions = {
   "screenOptions": {
     "headerShown": false
   },
-  "initialRoute": "NameAndYear"
+  "initialRoute": "NameAndYear1"
 };
 export const modulesOptions = {
   "@modules/app-menu": {
