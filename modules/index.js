@@ -1,61 +1,80 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, Text, Platform, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, View, Text, Image, TouchableOpacity } from 'react-native';
 
-const App = () => {
+const ProfileScreen = () => {
   const [name, setName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-
-  const handleSubmit = () => {
-    alert(`Name: ${name}, Date of Birth: ${dateOfBirth}`);
-  };
-
   return <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.inner}>
+      <View style={styles.header}>
         <Image source={{
         uri: 'https://tinyurl.com/42evm3m3'
       }} style={styles.logo} />
+        <Text style={styles.headerText}>Profile Information</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Name</Text>
         <TextInput style={styles.input} onChangeText={setName} value={name} placeholder="Enter your name" />
+        <Text style={styles.label}>Date of Birth</Text>
         <TextInput style={styles.input} onChangeText={setDateOfBirth} value={dateOfBirth} placeholder="YYYY-MM-DD" />
-        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
-      </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#f5f5f5'
   },
-  inner: {
-    width: '80%'
+  header: {
+    padding: 20,
+    backgroundColor: '#6200ee',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    borderRadius: 25
+  },
+  headerText: {
+    color: '#fff',
+    marginLeft: 10,
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  inputContainer: {
+    padding: 20
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    marginTop: 15,
+    color: '#333'
   },
   input: {
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
+    backgroundColor: '#fff',
     paddingHorizontal: 10,
-    borderRadius: 5
+    paddingVertical: 15,
+    borderRadius: 5,
+    fontSize: 16,
+    color: '#333',
+    borderWidth: 1,
+    borderColor: '#ddd'
   },
   button: {
-    backgroundColor: '#007BFF',
+    marginTop: 20,
+    backgroundColor: '#6200ee',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center'
   },
   buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16
-  },
-  logo: {
-    width: '100%',
-    height: 200,
-    marginBottom: 20,
-    borderRadius: 10
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });
-export default App;
+export default ProfileScreen;
