@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, Button, View, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Text, Platform, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
 
 const App = () => {
-  const [nameSurname, setNameSurname] = useState('');
-  const [yearOfBirth, setYearOfBirth] = useState('');
+  const [name, setName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
 
   const handleSubmit = () => {
-    alert(`Name and Surname: ${nameSurname}\nYear of Birth: ${yearOfBirth}`);
+    alert(`Name: ${name}, Date of Birth: ${dateOfBirth}`);
   };
 
   return <SafeAreaView style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Name and Surname</Text>
-        <TextInput style={styles.input} onChangeText={setNameSurname} value={nameSurname} placeholder="Enter your name and surname" />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Year of Birth</Text>
-        <TextInput style={styles.input} onChangeText={setYearOfBirth} value={yearOfBirth} placeholder="Enter your year of birth" keyboardType="numeric" />
-      </View>
-      <Button title="Submit" onPress={handleSubmit} />
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.inner}>
+        <Image source={{
+        uri: 'https://tinyurl.com/42evm3m3'
+      }} style={styles.logo} />
+        <TextInput style={styles.input} onChangeText={setName} value={name} placeholder="Enter your name" />
+        <TextInput style={styles.input} onChangeText={setDateOfBirth} value={dateOfBirth} placeholder="YYYY-MM-DD" />
+        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </SafeAreaView>;
 };
 
@@ -29,18 +30,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
-  inputContainer: {
-    width: '80%',
-    marginBottom: 20
+  inner: {
+    width: '80%'
   },
   input: {
-    height: 40,
+    height: 50,
     borderColor: 'gray',
     borderWidth: 1,
-    paddingHorizontal: 10
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 5
   },
-  label: {
-    marginBottom: 5
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16
+  },
+  logo: {
+    width: '100%',
+    height: 200,
+    marginBottom: 20,
+    borderRadius: 10
   }
 });
 export default App;
